@@ -6,17 +6,26 @@ class World {
   
   public World () {
     Room entry    = new Room("Entry");
-    Room corridor = new Room("Corridor");
-    Room cave     = new Room("Cave");
-    Room pit      = new Room("Darkest Pit");
-    Room outside  = new Room("Outside");
+    Room hubroom = new Room("Beredsskabsrum");
+    Room office = new Room("Kontor");
+    Room controlroom = new Room("Kontrolrum");
+    Room soproom = new Room("Personalerum");
+    Room lockerroom = new Room("Omklædsningrum");
+    Room labroom = new Room("Laboratoriet");
+    Room situationroom = new Room("SituationrumPlaceholder");
+    Room quizroom = new Room("QuizrumPlaceholder");
+    Room corridorwest = new Room("Gang mod vest");
+    Room corridornorth = new Room("Gang mod nord");
+    Room exitroom = new Room("ExitrumPlaceholder");
     
-    entry.AddEdge("door", corridor);
-    corridor.AddEdge("door", cave);
-    cave.AddEdge("north", pit);
-    cave.AddEdge("south", outside);
-    pit.AddEdge("door", cave);
-    outside.AddEdge("door", cave);
+    entry.AddEdge("door", corridorwest);
+    corridorwest.AddEdge("door", hubroom);
+    hubroom.AddEdge("south", office);
+    hubroom.AddEdge("north", corridornorth);
+    hubroom.AddEdge("east", situationroom);
+    office.AddEdge("south", controlroom);
+    controlroom.AddEdge("door", soproom);
+    soproom.AddEdge("door", lockerroom);
     
     this.entry = entry;
   }
