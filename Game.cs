@@ -1,33 +1,38 @@
 /* Main class for launching the game
  */
 
-class Game {
-  static World    world    = new World();
-  static Context  context  = new Context(world.GetEntry());
-  
-  static void Main (string[] args) {
-    Console.WriteLine("Welcome to the World of Zuul!");
-    
+class Game
+{
+  static World world = new World();
+  static Context context = new Context(world.GetEntry());
+
+  static void Main(string[] args)
+  {
+    Console.WriteLine("Du starter din dag på arbejde ved Bland & Håb A/S som nyanset medarbejder, du befinder dig i omklædningsrummmet.");
+
     context.GetCurrent().Welcome();
-    
-    while (context.IsDone()==false) {
+
+    while (context.IsDone() == false)
+    {
       Console.Write("> ");
       string? line = Console.ReadLine();
-      if (line==null) continue;
-      
+      if (line == null) continue;
+
       // parse line
       string[] elements = line.Split(" ");
       string command = elements[0];
       string[] parameters = GetParameters(elements);
-      
-      switch (command) {
+
+      switch (command)
+      {
         case "exit":
         case "quit":
         case "bye":
           context.MakeDone();
           break;
         case "go":
-          if (parameters.Length!=1) {
+          if (parameters.Length != 1)
+          {
             Console.WriteLine("I don't seem to know where that is 🤔");
             return;
           }
@@ -41,17 +46,19 @@ class Game {
           Console.WriteLine(" - help  Display a help message");
           break;
         default:
-          Console.WriteLine("Woopsie, I don't understand '"+command+"' 😕");
+          Console.WriteLine("Dette er ikke en mulig kommando '" + command + "'");
           break;
       }
     }
     Console.WriteLine("Game Over 😥");
   }
-  
-  private static string[] GetParameters (string[] input) {
-    string[] output = new string[input.Length-1];
-    for (int i=0 ; i<output.Length ; i++) {
-      output[i] = input[i+1];
+
+  private static string[] GetParameters(string[] input)
+  {
+    string[] output = new string[input.Length - 1];
+    for (int i = 0; i < output.Length; i++)
+    {
+      output[i] = input[i + 1];
     }
     return output;
   }
