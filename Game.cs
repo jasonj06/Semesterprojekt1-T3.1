@@ -46,7 +46,7 @@ class Game
           Console.WriteLine(" - help  Display a help message");
           break;
         default:
-          Console.WriteLine("Dette er ikke en mulig kommando '" + command + "'");
+          Console.WriteLine("Dette er ikke en mulig kommando '" + command);
           break;
       }
     }
