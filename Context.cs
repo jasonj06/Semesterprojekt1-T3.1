@@ -2,19 +2,19 @@
  */
 
 class Context {
-  Space current;
+  Room current;
   bool done = false;
   
-  public Context (Space node) {
+  public Context (Room node) {
     current = node;
   }
   
-  public Space GetCurrent() {
+  public Room GetCurrent() {
     return current;
   }
   
   public void Transition (string direction) {
-    Space next = current.FollowEdge(direction);
+    Room next = current.FollowEdge(direction);
     if (next==null) {
       Console.WriteLine("You are confused, and walk in a circle looking for '"+direction+"'. In the end you give up 😩");
     } else {
