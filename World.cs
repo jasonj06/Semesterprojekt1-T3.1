@@ -2,14 +2,14 @@
  */
 
 class World {
-  Space entry;
+  Room entry;
   
   public World () {
-    Space entry    = new Space("Entry");
-    Space corridor = new Space("Corridor");
-    Space cave     = new Space("Cave");
-    Space pit      = new Space("Darkest Pit");
-    Space outside  = new Space("Outside");
+    Room entry    = new Room("Entry");
+    Room corridor = new Room("Corridor");
+    Room cave     = new Room("Cave");
+    Room pit      = new Room("Darkest Pit");
+    Room outside  = new Room("Outside");
     
     entry.AddEdge("door", corridor);
     corridor.AddEdge("door", cave);
@@ -21,8 +21,7 @@ class World {
     this.entry = entry;
   }
   
-  public Space GetEntry () {
+  public Room GetEntry () {
     return entry;
   }
 }
-
