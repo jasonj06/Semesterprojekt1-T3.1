@@ -10,7 +10,7 @@ class World {
     Room office = new Room("Kontor");
     Room controlroom = new Room("Kontrolrum");
     Room soproom = new Room("Personalerum");
-    Room lockerroom = new Room("Omklædsningrum");
+    Room lockerroom = new Room("Omklædningsrum");
     Room labroom = new Room("Laboratoriet");
     Room situationroom = new Room("SituationrumPlaceholder");   
     Room quizroom = new Room("QuizrumPlaceholder");
