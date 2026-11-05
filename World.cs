@@ -48,6 +48,7 @@ class World {
     corridornorth.AddEdge("south", hubroom);
     corridornorth.AddEdge("north", labroom);
     labroom.AddEdge("south", corridornorth);
+    labroom.IsLocked = true;
     
 
     

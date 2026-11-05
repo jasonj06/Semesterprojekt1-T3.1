@@ -3,6 +3,9 @@
 
 class Room : Node
 {
+ //bool to make a room lockable
+  public bool IsLocked { get; set; } = false;
+
   public Room(String name) : base(name)
   {
   }
