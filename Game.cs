@@ -51,6 +51,12 @@ class Game
       }
     }
     Console.WriteLine("Game Over 😥");
+
+    Item pKort = new Item ("1", "Personalekort", "Bruges til at låse bestemte døre op", "Nøglekort", false);
+    Item SOP = new Item ("2", "SOP", "Indeholder sikkerhedsprocedurer og låser minimappet op","Dokument", true);
+    Item øjenSkyl = new Item ("3", "Øjenskyl", "Bruges i en situation, hvor spilleren har fået kemikalier i øjnene", "Medicin", true);
+    Item evak = new Item ("4","Evakueringsplan", "Kan læses for at få information om evakuering", "Dokument", false);
+    
   }
 
   private static string[] GetParameters(string[] input)
@@ -63,3 +69,4 @@ class Game
     return output;
   }
 }
+
