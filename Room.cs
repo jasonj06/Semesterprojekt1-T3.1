@@ -12,7 +12,7 @@ class Room : Node
 
   public void Welcome()
   {
-    Console.WriteLine("Du er nu i" + name);
+    Console.WriteLine("Du er nu i " + name);
     HashSet<string> exits = edges.Keys.ToHashSet();
     Console.WriteLine("Du ser disse nogle døre som fører til:");
     foreach (String exit in exits)
