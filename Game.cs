@@ -8,8 +8,13 @@ class Game
   // Tracks the current room and whether the game has ended, starting in the entry room.
   static Context context = new Context(world.GetEntry());
 
+  static Inventory inventory = new Inventory();
+  
   static void Main(string[] args)
   {
+    // Test item
+    inventory.AddItem(new Item("0", "Navn", "Beskrivelse", "Type", false));
+    
     Console.WriteLine("Du starter din dag på arbejde ved Bland & Håb A/S som nyanset medarbejder, du befinder dig i omklædningsrummmet.");
 
     // Displays the starting room's welcome message.
@@ -44,6 +49,22 @@ class Game
           }
           // Asks the context to move through the exit named by the parameter.
           context.Transition(parameters[0]);
+          break;
+        // Display the players inventory
+        case "inv":
+          List<Item> items = inventory.GetItems();
+          if (items.Count == 0)
+          {
+            Console.WriteLine("Du har ingen ting i din inventory");
+          }
+          else
+          {
+            Console.WriteLine("Du har følgende ting i din inventory:");
+            foreach (Item item in items)
+            {
+              Console.WriteLine(" - " + item.GetName());
+            }
+          }
           break;
         case "help":
           // Lists the available commands and what they do.
