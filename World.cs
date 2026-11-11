@@ -21,7 +21,7 @@ class World {
 
     // Place the items in the rooms where the player can find them.
     entry.AddItem(new Item("1", "Personalekort", "Bruges til at låse bestemte døre op", "Nøglekort", false));
-    soproom.AddItem(new Item("2", "SOP", "Indeholder sikkerhedsprocedurer og låser minimappet op", "Dokument", true));
+    soproom.AddItem(new Item("2", "SOP", "Indeholder evakueringsplan og låser minimappet op", "Dokument", true));
     labroom.AddItem(new Item("3", "Øjenskyl", "Bruges i en situation, hvor spilleren har fået kemikalier i øjnene", "Medicin", true));
     hubroom.AddItem(new Item("4", "Evakueringsplan", "Kan læses for at få information om evakuering", "Dokument", false));
 
