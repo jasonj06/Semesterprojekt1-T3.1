@@ -5,9 +5,6 @@ class Context {
   Room current;
   bool done = false;
 
-//placeholder indtil vi får keycard i inventory
-public bool keycard = false;
-  
   public Context (Room node) {
     current = node;
   }
@@ -16,21 +13,17 @@ public bool keycard = false;
     return current;
   }
   
-  public void Transition (string direction) {
-    Room next = current.FollowEdge(direction);
-    if (next==null) {
-      Console.WriteLine("You are confused, and walk in a circle looking for '"+direction+"'. In the end you give up 😩");
+  public void Transition (string destination) {
+    Room? next = current.FollowEdge(destination);
+    if (next == null) {
+      Console.WriteLine("Du kan ikke gå til " + destination + " herfra.");
       return;
     }
-    if (next.IsLocked){
-        if(keycard == true){  
-        Console.WriteLine("Du bipper dit nøglekort");
-        next.IsLocked = false;
-    } else {
-        Console.WriteLine("Døren er låst");
-        return;
+    // The player must unlock the destination before entering it.
+    if (next.IsLocked) {
+      Console.WriteLine("Døren er låst. Hvis du har et nøglekort, kan du skrive brug keycard.");
+      return;
     }
-}
     current.Goodbye();
     current = next;
     current.Welcome();

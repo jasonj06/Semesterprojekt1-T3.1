@@ -12,9 +12,17 @@ class Game
   
   static void Main(string[] args)
   {
+    Console.WriteLine("Velkommen til vores evakuerings spil omkring kemikalie sikkerhed, tryk enter for at forsætte");
+    // Show the commands before waiting for Enter.
+    ShowCommands();
+    if (Console.ReadLine() == null)
+    {
+      return;
+    }
+
     // Test item
     inventory.AddItem(new Item("0", "Navn", "Beskrivelse", "Type", false));
-    
+
     Console.WriteLine("Du starter din dag på arbejde ved Bland & Håb A/S som nyanset medarbejder, du befinder dig i omklædningsrummmet.");
 
     // Displays the starting room's welcome message.
@@ -30,49 +38,47 @@ class Game
 
       string[] elements = line.Split(" ");
       string command = elements[0];
-      string[] parameters = GetParameters(elements);
+      // Keep the whole room or item name, including any spaces.
+      string target = string.Join(" ", GetParameters(elements)).Trim(' ', '"');
 
-      // Runs the code matching the player's command.
-      switch (command)
+      // Match commands even when the player uses capital letters.
+      switch (command.ToLowerInvariant())
       {
+        case "stop":
         case "exit":
         case "quit":
         case "bye":
           context.MakeDone();
           break;
-        case "go":
-          if (parameters.Length != 1)
+        case "gå":
+          if (target.Length == 0)
           {
-            Console.WriteLine("I don't seem to know where that is 🤔");
-            // Leaves Main and ends the program when the parameter count is incorrect.
-            return;
+            Console.WriteLine("Skriv gå efterfulgt af rummets navn.");
+            break;
           }
-          // Asks the context to move through the exit named by the parameter.
-          context.Transition(parameters[0]);
+          context.Transition(target);
           break;
-        // Display the players inventory
+        case "søg":
+          context.GetCurrent().Search();
+          break;
+        case "tag":
+          if (target.Length == 0)
+          {
+            Console.WriteLine("Skriv tag efterfulgt af genstandens navn.");
+            break;
+          }
+          context.GetCurrent().TakeItem(target, inventory);
+          break;
+        case "brug":
+          UseItem(target);
+          break;
+        case "inventory":
         case "inv":
-          List<Item> items = inventory.GetItems();
-          if (items.Count == 0)
-          {
-            Console.WriteLine("Du har ingen ting i din inventory");
-          }
-          else
-          {
-            Console.WriteLine("Du har følgende ting i din inventory:");
-            foreach (Item item in items)
-            {
-              Console.WriteLine(" - " + item.GetName());
-            }
-          }
+          ShowInventory();
           break;
+        case "info":
         case "help":
-          // Lists the available commands and what they do.
-          Console.WriteLine(" - exit  Exit the program");
-          Console.WriteLine(" - quit  Exit the program");
-          Console.WriteLine(" - bye   Exit the program");
-          Console.WriteLine(" - go    Follow an exit");
-          Console.WriteLine(" - help  Display a help message");
+          ShowCommands();
           break;
         default:
           // Handles input that does not match any of the commands above.
@@ -82,16 +88,75 @@ class Game
     }
     // Displays the ending message once the game loop has stopped.
     Console.WriteLine("Game Over 😥");
-
-    // Creates the four items. These statements currently run after the game loop finishes.
-    Item pKort = new Item ("1", "Personalekort", "Bruges til at låse bestemte døre op", "Nøglekort", false);
-    Item SOP = new Item ("2", "SOP", "Indeholder sikkerhedsprocedurer og låser minimappet op","Dokument", true);
-    Item øjenSkyl = new Item ("3", "Øjenskyl", "Bruges i en situation, hvor spilleren har fået kemikalier i øjnene", "Medicin", true);
-    Item evak = new Item ("4","Evakueringsplan", "Kan læses for at få information om evakuering", "Dokument", false);
-    
   }
 
-  // Returns all words after the command. For example, "go north" gives the parameter "north".
+  // The welcome screen, info and help share this command list.
+  private static void ShowCommands()
+  {
+    Console.WriteLine("--- Kommandoer ---");
+    Console.WriteLine(" - gå <rumnavn>  Gå til et rum");
+    Console.WriteLine(" - søg  Søg efter genstande i rummet");
+    Console.WriteLine(" - tag <genstand>  Saml en genstand op");
+    Console.WriteLine(" - brug <genstand>  Brug en genstand fra din inventory");
+    Console.WriteLine(" - inventory, inv  Vis dine genstande");
+    Console.WriteLine(" - info, help  Vis alle kommandoer");
+    Console.WriteLine(" - stop, exit, quit, bye  Afslut spillet");
+  }
+
+  private static void UseItem(string itemName)
+  {
+    if (itemName.Length == 0)
+    {
+      Console.WriteLine("Skriv brug efterfulgt af genstandens navn.");
+      return;
+    }
+
+    // Let the player use either "keycard" or the item's name.
+    if (string.Equals(itemName, "keycard", StringComparison.OrdinalIgnoreCase))
+    {
+      itemName = "Personalekort";
+    }
+
+    Item? item = inventory.FindItem(itemName);
+    if (item == null)
+    {
+      Console.WriteLine("Du har ikke " + itemName + " i din inventory.");
+      return;
+    }
+
+    switch (item.GetItemType())
+    {
+      case "Nøglekort":
+        context.GetCurrent().UseKeycard();
+        break;
+      case "Dokument":
+        Console.WriteLine(item.Read());
+        break;
+      default:
+        Console.WriteLine("Du kan ikke bruge " + item.GetName() + " her.");
+        break;
+    }
+  }
+
+  private static void ShowInventory()
+  {
+    List<Item> items = inventory.GetItems();
+    // Show at least four slots, with extra lines for any additional items.
+    int numberOfSlots = Math.Max(4, items.Count);
+
+    Console.WriteLine("--- Inventory ---");
+    for (int i = 0; i < numberOfSlots; i++)
+    {
+      string slot = (i + 1) + ".";
+      if (i < items.Count)
+      {
+        slot += " " + items[i].GetName();
+      }
+      Console.WriteLine(slot);
+    }
+  }
+
+  // Returns the words after the command.
   private static string[] GetParameters(string[] input)
   {
     // Reserves space for every word except the first word, which is the command.

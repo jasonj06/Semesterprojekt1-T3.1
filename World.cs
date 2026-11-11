@@ -5,18 +5,25 @@ class World {
   Room entry;
   
   public World () {
-    Room entry    = new Room("Entry");
-    Room hubroom = new Room("Beredsskabsrum");
-    Room office = new Room("Kontor");
-    Room controlroom = new Room("Kontrolrum");
-    Room soproom = new Room("Personalerum");
-    Room lockerroom = new Room("Omklædningsrum");
-    Room labroom = new Room("Laboratoriet");
-    Room situationroom = new Room("SituationrumPlaceholder");   
-    Room quizroom = new Room("QuizrumPlaceholder");
-    Room corridorwest = new Room("Gang mod vest");
-    Room corridornorth = new Room("Gang mod nord");
-    Room exitroom = new Room("ExitrumPlaceholder");
+    // The second value is the message shown when the player enters.
+    Room entry    = new Room("Entry", "placeholder message");
+    Room hubroom = new Room("Beredsskabsrum", "placeholder message");
+    Room office = new Room("Kontor", "placeholder message");
+    Room controlroom = new Room("Kontrolrum", "placeholder message");
+    Room soproom = new Room("Personalerum", "placeholder message");
+    Room lockerroom = new Room("Omklædningsrum", "placeholder message");
+    Room labroom = new Room("Laboratoriet", "placeholder message");
+    Room situationroom = new Room("SituationrumPlaceholder", "placeholder message");
+    Room quizroom = new Room("QuizrumPlaceholder", "placeholder message");
+    Room corridorwest = new Room("Gang mod vest", "placeholder message");
+    Room corridornorth = new Room("Gang mod nord", "placeholder message");
+    Room exitroom = new Room("ExitrumPlaceholder", "placeholder message");
+
+    // Place the items in the rooms where the player can find them.
+    entry.AddItem(new Item("1", "Personalekort", "Bruges til at låse bestemte døre op", "Nøglekort", false));
+    soproom.AddItem(new Item("2", "SOP", "Indeholder sikkerhedsprocedurer og låser minimappet op", "Dokument", true));
+    labroom.AddItem(new Item("3", "Øjenskyl", "Bruges i en situation, hvor spilleren har fået kemikalier i øjnene", "Medicin", true));
+    hubroom.AddItem(new Item("4", "Evakueringsplan", "Kan læses for at få information om evakuering", "Dokument", false));
 
     //left side of the map
     entry.AddEdge("door", corridorwest);
