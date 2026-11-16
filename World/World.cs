@@ -75,7 +75,8 @@ class World {
       Room samlingspunkt = new Room("Samlingspunkt", "SP", 2, 5,
           "Du er nået frem til samlingsstedet uden for bygningen. " +
           "Andre medarbejdere er samlet her, mens beredskabet arbejder på at håndtere ulykken. " +
-          "Du er nu i sikkerhed.");
+          "Du er nu i sikkerhed. " +
+          "Bereskabet vil stille dig nogle spørgsmål");
 
   // Place the items in the rooms where the player can find them.
 
