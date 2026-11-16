@@ -76,6 +76,7 @@ class Game
           context.Transition(target);
           break;
         case "søg":
+        case "sog":
           context.GetCurrent().Search();
           break;
         case "tag":
