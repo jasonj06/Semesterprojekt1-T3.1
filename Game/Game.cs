@@ -12,12 +12,18 @@ class Game
   
   static void Main(string[] args)
   {
-    Console.WriteLine("Velkommen til vores evakuerings spil omkring kemikalie sikkerhed, tryk enter for at forsætte");
+    Console.OutputEncoding = System.Text.Encoding.UTF8;
+    Typewriter.WriteLine("Velkommen til vores evakuerings spil omkring kemikalie sikkerhed, tryk enter for at forsætte");
     // Show the commands before waiting for Enter.
     ShowCommands();
     if (Console.ReadLine() == null)
     {
       return;
+    }
+
+    if (!Console.IsOutputRedirected)
+    {
+      Console.Clear();
     }
 
     // Test item
@@ -34,10 +40,10 @@ class Game
     Item brandØkse = new Item("5", "Brandøkse", "Bruges til at åbne bestemte blokerede passager", "Værktøj", false);
     //Nye og ændrede items
 
-    Console.WriteLine("Du starter din dag på arbejde ved Bland & Håb A/S som nyanset medarbejder, du befinder dig i omklædningsrummmet.");
+    Typewriter.WriteLine("Du starter din dag på arbejde ved Bland & Håb A/S som nyanset medarbejder, du befinder dig i omklædningsrummmet.");
 
     // Displays the starting room's welcome message.
-    context.GetCurrent().Welcome();
+    context.ShowCurrentRoom();
 
     // Keeps asking for commands until the context marks the game as finished.
     while (context.IsDone() == false)
@@ -64,7 +70,7 @@ class Game
         case "gå":
           if (target.Length == 0)
           {
-            Console.WriteLine("Skriv gå efterfulgt af rummets navn.");
+            Typewriter.WriteLine("Skriv gå efterfulgt af rummets navn.");
             break;
           }
           context.Transition(target);
@@ -75,7 +81,7 @@ class Game
         case "tag":
           if (target.Length == 0)
           {
-            Console.WriteLine("Skriv tag efterfulgt af genstandens navn.");
+            Typewriter.WriteLine("Skriv tag efterfulgt af genstandens navn.");
             break;
           }
           context.GetCurrent().TakeItem(target, inventory);
@@ -93,12 +99,12 @@ class Game
           break;
         default:
           // Handles input that does not match any of the commands above.
-          Console.WriteLine("Dette er ikke en mulig kommando '" + command);
+          Typewriter.WriteLine("Dette er ikke en mulig kommando '" + command);
           break;
       }
     }
     // Displays the ending message once the game loop has stopped.
-    Console.WriteLine("Game Over 😥");
+    Typewriter.WriteLine("Game Over 😥");
   }
 
   // The welcome screen, info and help share this command list.
@@ -118,7 +124,7 @@ class Game
   {
     if (itemName.Length == 0)
     {
-      Console.WriteLine("Skriv brug efterfulgt af genstandens navn.");
+      Typewriter.WriteLine("Skriv brug efterfulgt af genstandens navn.");
       return;
     }
 
@@ -131,7 +137,7 @@ class Game
     Item? item = inventory.FindItem(itemName);
     if (item == null)
     {
-      Console.WriteLine("Du har ikke " + itemName + " i din inventory.");
+      Typewriter.WriteLine("Du har ikke " + itemName + " i din inventory.");
       return;
     }
 
@@ -141,10 +147,10 @@ class Game
         context.GetCurrent().UseKeycard();
         break;
       case "Dokument":
-        Console.WriteLine(item.Read());
+        Typewriter.WriteLine(item.Read());
         break;
       default:
-        Console.WriteLine("Du kan ikke bruge " + item.GetName() + " her.");
+        Typewriter.WriteLine("Du kan ikke bruge " + item.GetName() + " her.");
         break;
     }
   }
