@@ -77,11 +77,34 @@ class World {
           "Andre medarbejdere er samlet her, mens beredskabet arbejder på at håndtere ulykken. " +
           "Du er nu i sikkerhed.");
   }
-    // Place the items in the rooms where the player can find them.
-    reception.AddItem(new Item("1", "Personalekort", "Bruges til at låse bestemte døre op", "Nøglekort", false));
-    kantine.AddItem(new Item("2", "SOP", "Indeholder evakueringsplan og låser minimappet op", "Dokument", true));
-    laboratoriet.AddItem(new Item("3", "Øjenskyl", "Bruges i en situation, hvor spilleren har fået kemikalier i øjnene", "Medicin", true));
-    faellesomraade.AddItem(new Item("4", "Evakueringsplan", "Kan læses for at få information om evakuering", "Dokument", false));
+
+  // Place the items in the rooms where the player can find them.
+
+  // Brandslukker - erstatter personalekort
+  teknikrum.AddItem(new Item("1", "Brandslukker",
+      "Bruges til at slukke en mindre brand, hvis det er sikkert",
+      "Sikkerhedsudstyr", true));
+
+  // SOP - beholdes
+  kantine.AddItem(new Item("2", "SOP",
+      "Indeholder sikkerhedsprocedurer og låser minimappet op",
+      "Dokument", true));
+
+  // Førstehjælpskasse - erstatter øjenskyl
+  foerstehjaelp.AddItem(new Item("3", "Førstehjælpskasse",
+      "Bruges til at behandle skader og forbrændinger",
+      "Førstehjælp", true));
+
+  // Evakueringsplan - beholdes
+  faellesomraade.AddItem(new Item("4", "Evakueringsplan",
+      "Kan læses for at få information om evakuering",
+      "Dokument", false));
+
+  // Brandøkse - nyt item
+  depot.AddItem(new Item("5", "Brandøkse",
+      "Bruges til at åbne bestemte blokerede passager",
+      "Værktøj", false));
+
 
     //1. og 2. søjle/venstre af map
     reception.AddEdge("east", mellemgang);
