@@ -11,17 +11,17 @@ class World {
       Room reception = new Room("Reception",
           "Du står i receptionen. Alarmen lyder, og området er forladt. " +
           "På skranken ligger papirer og forskellige efterladte genstande. " +
-          "Måske er der noget brugbart, hvis du søger i området.");
+          "Måske er der noget brugbart");
   
       Room teknikrum = new Room("Teknikrum",
           "Du træder ind i teknikrummet. Maskinerne summer, og advarselslamper blinker. " +
-          "Værktøj og teknisk udstyr ligger spredt omkring. " +
+          "Værktøj og teknisk udstyr ligger spredt omkring dig. " +
           "Det kunne være værd at undersøge rummet nærmere.");
   
       Room mellemgang = new Room("Mellemgang",
           "Du befinder dig i en smal mellemgang. Nødlyset blinker, " +
           "og du kan høre alarmen i det fjerne. " +
-          "Langs væggene står enkelte skabe, som måske gemmer på noget.");
+          "Langs væggene står enkelte skabe.");
   
       Room kontrolrum = new Room("Kontrolrum",
           "Du træder ind i kontrolrummet. Flere skærme viser advarsler, " +
@@ -30,53 +30,43 @@ class World {
   
       Room gangmodvest = new Room("Gang mod Vest",
           "Du bevæger dig ned ad gangen mod vest. Luften føles varm, " +
-          "og der lugter svagt af røg. Flere genstande ligger langs væggene. " +
+          "og der lugter svagt af røg." +
           "Det kan være en god idé at se sig omkring.");
   
       Room faellesomraade = new Room("Fællesområde",
           "Du kommer ind i fællesområdet. Stole er væltet, og papirer ligger på gulvet. " +
-          "På væggen hænger forskellige opslag om virksomhedens sikkerhedsprocedurer. " +
-          "Måske findes der nyttige oplysninger her.");
+          "På væggen hænger forskellige opslag om virksomhedens sikkerhedsprocedurer. ");
   
       Room gangmodnord = new Room("Gang mod Nord",
           "Du træder ind i en lang gang mod nord. Nødlyset oplyser kun dele af området, " +
-          "og flere døre fører videre gennem bygningen. " +
-          "Du overvejer, om der er noget, du bør undersøge, inden du fortsætter.");
+          "og flere døre fører videre gennem bygningen. ");
   
       Room laboratoriet = new Room("Laboratoriet",
           "Du træder forsigtigt ind i laboratoriet. Flere arbejdsstationer er forladte, " +
-          "og advarselsskilte hænger på væggene. " +
-          "Der står forskelligt sikkerhedsudstyr i lokalet, som måske kan blive nyttigt.");
+          "Der står forskelligt sikkerhedsudstyr i lokalet, som måske kan blive nyttigt senere.");
   
       Room kemikalielager = new Room("Kemikalielager",
           "Du befinder dig i kemikalielageret. Store beholdere står på hylderne, " +
-          "og en kraftig lugt får dig til at være ekstra opmærksom. " +
-          "Du bør vurdere omgivelserne grundigt, før du foretager dig noget.");
+          "og en kraftig lugt får dig til at være ekstra opmærksom. ");
   
       Room kontor = new Room("Kontor",
           "Du kommer ind på et forladt kontor. Computerskærmene lyser stadig, " +
-          "og mapper ligger spredt over skrivebordene. " +
-          "Måske er der noget vigtigt blandt de efterladte ting.");
+          "og mapper ligger spredt over skrivebordene. ");
   
       Room foerstehjaelp = new Room("Førstehjælpsrum",
           "Du træder ind i førstehjælpsrummet. Et grønt førstehjælpsskilt hænger på væggen, " +
-          "og skabe med medicinsk udstyr står langs siderne. " +
-          "Det virker som et oplagt sted at søge efter hjælpemidler.");
+          "og skabe med medicinsk udstyr står langs siderne. ");
   
       Room kantine = new Room("Kantine",
-          "Du befinder dig i kantinen. Maden står efterladt på bordene, " +
-          "og medarbejderne ser ud til at være flygtet hurtigt. " +
-          "På opslagstavlen hænger forskellige dokumenter, som måske er værd at undersøge.");
+          "Du befinder dig i kantinen." +
+          "På opslagstavlen hænger forskellige dokumenter og billeder.");
   
       Room depot = new Room("Depot",
-          "Du træder ind i depotet. Hylderne er fyldt med kasser, værktøj og udstyr. " +
-          "Noget af udstyret kan måske hjælpe dig gennem bygningen. " +
-          "Det kunne være en god idé at søge her.");
+          "Du træder ind i depotet. Et lille mørkt rum med hylderne fyldt med kasser, værktøj og udstyr.");
   
       Room omklaedningsrum = new Room("Omklædningsrum",
           "Du kommer ind i omklædningsrummet. Flere skabe står åbne, " +
-          "og arbejdstøj ligger spredt på bænkene. " +
-          "Måske har nogen efterladt noget, som du kan få brug for.");
+          "og arbejdstøj ligger spredt på bænkene. ");
   
       Room udgang = new Room("Exit",
           "Du får øje på bygningens udgang. Den friske luft kan næsten mærkes, " +
@@ -87,8 +77,6 @@ class World {
           "Andre medarbejdere er samlet her, mens beredskabet arbejder på at håndtere ulykken. " +
           "Du er nu i sikkerhed.");
   }
-
-
     // Place the items in the rooms where the player can find them.
     reception.AddItem(new Item("1", "Personalekort", "Bruges til at låse bestemte døre op", "Nøglekort", false));
     kantine.AddItem(new Item("2", "SOP", "Indeholder evakueringsplan og låser minimappet op", "Dokument", true));
