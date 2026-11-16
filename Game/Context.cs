@@ -41,6 +41,9 @@ class Context {
       Console.Clear();
     }
     ShowCurrentRoom();
+    if (current.GetName() == "Samlingspunkt") {
+      Quiz.StartQuiz();
+    }
   }
 
 
