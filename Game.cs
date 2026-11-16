@@ -52,11 +52,16 @@ class Game
     }
     Console.WriteLine("Game Over 😥");
 
-    Item pKort = new Item ("1", "Personalekort", "Bruges til at låse bestemte døre op", "Nøglekort", false);
-    Item SOP = new Item ("2", "SOP", "Indeholder sikkerhedsprocedurer og låser minimappet op","Dokument", true);
-    Item øjenSkyl = new Item ("3", "Øjenskyl", "Bruges i en situation, hvor spilleren har fået kemikalier i øjnene", "Medicin", true);
-    Item evak = new Item ("4","Evakueringsplan", "Kan læses for at få information om evakuering", "Dokument", false);
+    Item brandSlukker = new Item("1", "Brandslukker", "Bruges til at slukke mindre brande", "Sikkerhedsudstyr", true);
     
+    Item SOP = new Item("2", "SOP", "Indeholder sikkerhedsprocedurer og låser minimappet op i tutorial", "Dokument", true);
+    
+    Item førstehjælpskasse = new Item("3", "Førstehjælpskasse", "Bruges til at behandle skader og forbrændinger", "Førstehjælp", true);
+    
+    Item evak = new Item("4", "Evakueringsplan", "Kan læses for at få information om evakuering", "Dokument", false);
+    
+    Item brandØkse = new Item("5", "Brandøkse", "Bruges til at åbne bestemte blokerede passager", "Værktøj", false);
+    //Nye og ændrede items
   }
 
   private static string[] GetParameters(string[] input)
@@ -69,4 +74,3 @@ class Game
     return output;
   }
 }
-
