@@ -81,12 +81,12 @@ class World {
   // Place the items in the rooms where the player can find them.
 
   // Brandslukker - erstatter personalekort
-  teknikrum.AddItem(new Item("1", "Brandslukker",
+  kemikalielager.AddItem(new Item("1", "Brandslukker",
       "Bruges til at slukke en mindre brand, hvis det er sikkert",
       "Sikkerhedsudstyr", true));
 
   // SOP - beholdes
-  kantine.AddItem(new Item("2", "SOP",
+  reception.AddItem(new Item("2", "SOP",
       "Indeholder sikkerhedsprocedurer og låser minimappet op",
       "Dokument", true));
 
