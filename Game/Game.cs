@@ -26,6 +26,19 @@ class Game
       Console.Clear();
     }
 
+    Typewriter.WriteLine("Du starter din dag på arbejde ved Bland & Håb A/S som nyanset medarbejder, du befinder dig i receptionen.");
+    Situation.Explosion();
+    Console.WriteLine("Tryk Enter for at fortsætte.");
+    if (Console.ReadLine() == null)
+    {
+      return;
+    }
+
+    if (!Console.IsOutputRedirected)
+    {
+      Console.Clear();
+    }
+
     // Test item
     inventory.AddItem(new Item("0", "Navn", "Beskrivelse", "Type", false));
 
@@ -39,8 +52,6 @@ class Game
     
     Item brandØkse = new Item("5", "Brandøkse", "Bruges til at åbne bestemte blokerede passager", "Værktøj", false);
     //Nye og ændrede items
-
-    Typewriter.WriteLine("Du starter din dag på arbejde ved Bland & Håb A/S som nyanset medarbejder, du befinder dig i omklædningsrummmet.");
 
     // Displays the starting room's welcome message.
     context.ShowCurrentRoom();

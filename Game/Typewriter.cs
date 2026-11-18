@@ -1,6 +1,6 @@
 static class Typewriter
 {
-  private const int LetterDelayMs = 10;
+  private const int LetterDelayMs = 5;
 
   public static void WriteLine(string text)
   {

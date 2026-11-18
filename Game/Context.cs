@@ -5,6 +5,7 @@ class Context {
   Room current;
   bool done = false;
   private readonly Minimap minimap = new Minimap();
+  public TurnTimer Timer { get; } = new TurnTimer();
 
   public Context (Room node) {
     current = node;
@@ -15,6 +16,7 @@ class Context {
   }
 
   public void ShowCurrentRoom() {
+    Console.WriteLine("Tur: " + Timer.CurrentTurn);
     var (textWidth, mapEndRow) = minimap.Show(current);
     current.Welcome(textWidth);
 
@@ -40,6 +42,13 @@ class Context {
     if (!Console.IsOutputRedirected) {
       Console.Clear();
     }
+
+    // Only a successful move advances the timer.
+    Timer.Advance();
+    if (done) {
+      return;
+    }
+
     ShowCurrentRoom();
     if (current.GetName() == "Samlingspunkt") {
       Quiz.StartQuiz();
