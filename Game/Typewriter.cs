@@ -18,4 +18,25 @@ static class Typewriter
 
     Console.WriteLine();
   }
+
+  public static void WriteLineColor(ConsoleColor color, string text)
+  {
+    if (Console.IsOutputRedirected)
+    {
+      Console.WriteLine(text);
+      return;
+    }
+
+    var originalColor = Console.ForegroundColor;
+    Console.ForegroundColor = color;
+
+    foreach (var letter in text.EnumerateRunes())
+    {
+      Console.Write(letter.ToString());
+      Thread.Sleep(LetterDelayMs);
+    }
+
+    Console.WriteLine();
+    Console.ForegroundColor = originalColor;
+  }
 }
