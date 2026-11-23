@@ -86,19 +86,19 @@ class World {
       "Sikkerhedsudstyr", true));
 
   // SOP - beholdes
-  reception.AddItem(new Item("2", "SOP",
-      "Indeholder sikkerhedsprocedurer og låser minimappet op",
-      "Dokument", true));
+  // reception.AddItem(new Item("2", "SOP",
+  //    "Indeholder sikkerhedsprocedurer",
+  //    "Dokument", true));
 
   // Førstehjælpskasse - erstatter øjenskyl
   foerstehjaelp.AddItem(new Item("3", "Førstehjælpskasse",
       "Bruges til at behandle skader og forbrændinger",
       "Førstehjælp", true));
 
-  // Evakueringsplan - beholdes
-  faellesomraade.AddItem(new Item("4", "Evakueringsplan",
-      "Kan læses for at få information om evakuering",
-      "Dokument", false));
+  // Evakueringsplanen bruges i tutorialen til at låse minimappet op.
+  reception.AddItem(new Item("4", "Evakueringsplan",
+      "Låser minimappet op, når du bruger den",
+      "Dokument", true));
 
   // Brandøkse - nyt item
   depot.AddItem(new Item("5", "Brandøkse",

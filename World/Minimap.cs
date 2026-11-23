@@ -4,10 +4,21 @@ class Minimap
   private const int TileWidth = 6;
   private const int MapWidth = (2 * Radius + 1) * (TileWidth + 1) - 1;
   private readonly Dictionary<(int, int), Room> visited = new Dictionary<(int, int), Room>();
+  private bool unlocked = false;
+
+  public void Unlock()
+  {
+    unlocked = true;
+  }
 
   public (int TextWidth, int EndRow) Show(Room current)
   {
     visited[(current.MapColumn, current.MapRow)] = current;
+    if (!unlocked)
+    {
+      return (0, 0);
+    }
+
     List<string> lines = DrawRooms(current);
 
     if (!Console.IsOutputRedirected)

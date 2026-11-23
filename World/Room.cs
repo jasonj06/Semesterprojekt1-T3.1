@@ -68,6 +68,10 @@ class Room : Node
     inventory.AddItem(item);
     roomItems.RemoveItem(item);
     Typewriter.WriteLine("Du tog " + item.GetName() + ".");
+    if (item.GetId() == "4")
+    {
+      Typewriter.WriteLine("Skriv inv for at se evakueringsplanen i din inventory.");
+    }
   }
 
   public void UseKeycard()
@@ -88,7 +92,6 @@ class Room : Node
 
   public void Welcome(int textWidth)
   {
-    Typewriter.WriteLine("Du er nu i " + name);
     WriteEntryMessage(textWidth);
     Console.WriteLine("Du kan gå til:");
     foreach (KeyValuePair<string, Node> exit in edges)

@@ -14,8 +14,6 @@ class Game
   {
     Console.OutputEncoding = System.Text.Encoding.UTF8;
     Typewriter.WriteLine("Velkommen til vores evakuerings spil omkring kemikalie sikkerhed, tryk enter for at forsætte");
-    // Show the commands before waiting for Enter.
-    ShowCommands();
     if (Console.ReadLine() == null)
     {
       return;
@@ -44,17 +42,27 @@ class Game
 
     Item brandSlukker = new Item("1", "Brandslukker", "Bruges til at slukke mindre brande", "Sikkerhedsudstyr", true);
     
-    Item SOP = new Item("2", "SOP", "Indeholder sikkerhedsprocedurer og låser minimappet op i tutorial", "Dokument", true);
+    //Item SOP = new Item("2", "SOP", "Indeholder sikkerhedsprocedurer", "Dokument", true);
     
     Item førstehjælpskasse = new Item("3", "Førstehjælpskasse", "Bruges til at behandle skader og forbrændinger", "Førstehjælp", true);
     
-    Item evak = new Item("4", "Evakueringsplan", "Kan læses for at få information om evakuering", "Dokument", false);
+    Item evak = new Item("4", "Evakueringsplan", "Låser minimappet op, når du bruger den", "Dokument", true);
     
     Item brandØkse = new Item("5", "Brandøkse", "Bruges til at åbne bestemte blokerede passager", "Værktøj", false);
     //Nye og ændrede items
 
     // Displays the starting room's welcome message.
     context.ShowCurrentRoom();
+    ConsoleColor previousColor = Console.ForegroundColor;
+    if (!Console.IsOutputRedirected)
+    {
+      Console.ForegroundColor = ConsoleColor.Yellow;
+    }
+    Typewriter.WriteLine("Skriv søg for at undersøge rummet og finde evakueringsplanen.");
+    if (!Console.IsOutputRedirected)
+    {
+      Console.ForegroundColor = previousColor;
+    }
 
     // Keeps asking for commands until the context marks the game as finished.
     while (context.IsDone() == false)
@@ -119,7 +127,7 @@ class Game
     Typewriter.WriteLine("Game Over 😥");
   }
 
-  // The welcome screen, info and help share this command list.
+  // Info and help share this command list.
   private static void ShowCommands()
   {
     Console.WriteLine("--- Kommandoer ---");
@@ -153,6 +161,33 @@ class Game
       return;
     }
 
+    if (item.GetId() == "4")
+    {
+      inventory.RemoveItem(item);
+      context.UnlockMinimap();
+
+      if (!Console.IsOutputRedirected)
+      {
+        Console.Clear();
+      }
+
+      //Melanie tutorial message
+      Console.WriteLine("placeholder message");
+      Console.WriteLine("Tryk Enter for at vende tilbage til rummet.");
+      if (Console.ReadLine() == null)
+      {
+        context.MakeDone();
+        return;
+      }
+
+      if (!Console.IsOutputRedirected)
+      {
+        Console.Clear();
+      }
+      context.ShowCurrentRoom();
+      return;
+    }
+
     switch (item.GetItemType())
     {
       case "Nøglekort":
@@ -182,6 +217,11 @@ class Game
         slot += " " + items[i].GetName();
       }
       Console.WriteLine(slot);
+    }
+
+    if (inventory.FindItem("Evakueringsplan") != null)
+    {
+      Typewriter.WriteLine("Skriv brug Evakueringsplan for at læse planen og låse minimappet op.");
     }
   }
 

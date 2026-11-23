@@ -15,6 +15,10 @@ class Context {
     return current;
   }
 
+  public void UnlockMinimap() {
+    minimap.Unlock();
+  }
+
   public void ShowCurrentRoom() {
     Console.WriteLine("Tur: " + Timer.CurrentTurn);
     var (textWidth, mapEndRow) = minimap.Show(current);
