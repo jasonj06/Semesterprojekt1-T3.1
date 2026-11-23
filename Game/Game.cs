@@ -37,12 +37,7 @@ class Game
       Console.Clear();
     }
 
-    // Test item
-    inventory.AddItem(new Item("0", "Navn", "Beskrivelse", "Type", false));
-
     Item brandSlukker = new Item("1", "Brandslukker", "Bruges til at slukke mindre brande", "Sikkerhedsudstyr", true);
-    
-    //Item SOP = new Item("2", "SOP", "Indeholder sikkerhedsprocedurer", "Dokument", true);
     
     Item førstehjælpskasse = new Item("3", "Førstehjælpskasse", "Bruges til at behandle skader og forbrændinger", "Førstehjælp", true);
     
@@ -148,12 +143,6 @@ class Game
       return;
     }
 
-    // Let the player use either "keycard" or the item's name.
-    if (string.Equals(itemName, "keycard", StringComparison.OrdinalIgnoreCase))
-    {
-      itemName = "Personalekort";
-    }
-
     Item? item = inventory.FindItem(itemName);
     if (item == null)
     {
@@ -190,9 +179,6 @@ class Game
 
     switch (item.GetItemType())
     {
-      case "Nøglekort":
-        context.GetCurrent().UseKeycard();
-        break;
       case "Dokument":
         Typewriter.WriteLine(item.Read());
         break;

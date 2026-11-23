@@ -8,8 +8,6 @@ class Room : Node
   // Each room remembers if the player has searched it.
   private bool searched = false;
 
- //bool to make a room lockable
-  public bool IsLocked { get; set; } = false;
   public string MapLabel { get; }
   public int MapColumn { get; }
   public int MapRow { get; }
@@ -74,22 +72,6 @@ class Room : Node
     }
   }
 
-  public void UseKeycard()
-  {
-    // Look for a locked room the player can reach from here.
-    foreach (Room destination in edges.Values)
-    {
-      if (destination.IsLocked)
-      {
-        destination.IsLocked = false;
-        Typewriter.WriteLine("Du låste døren til " + destination.GetName() + " op med dit nøglekort.");
-        return;
-      }
-    }
-
-    Typewriter.WriteLine("Der er ingen låste døre, hvor du kan bruge nøglekortet her.");
-  }
-
   public void Welcome(int textWidth)
   {
     WriteEntryMessage(textWidth);
@@ -131,10 +113,6 @@ class Room : Node
       }
       Typewriter.WriteLine(line);
     }
-  }
-
-  public void Goodbye()
-  {
   }
 
   public override Room? FollowEdge(string destination)

@@ -38,11 +38,6 @@ class Context {
       Typewriter.WriteLine("Du kan ikke gå til " + destination + " herfra.");
       return;
     }
-    // The player must unlock the destination before entering it.
-    if (next.IsLocked) {
-      Typewriter.WriteLine("Døren er låst. Hvis du har et nøglekort, kan du skrive brug keycard.");
-      return;
-    }
     
     if(destination.ToLower() == "exit" && !IsExitUnblocked)
     {
@@ -56,7 +51,6 @@ class Context {
         return;
     }
     
-    current.Goodbye();
     current = next;
     if (!Console.IsOutputRedirected) {
       Console.Clear();

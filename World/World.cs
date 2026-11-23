@@ -80,15 +80,10 @@ class World {
 
   // Place the items in the rooms where the player can find them.
 
-  // Brandslukker - erstatter personalekort
+  // Brandslukker
   kemikalielager.AddItem(new Item("1", "Brandslukker",
       "Bruges til at slukke en mindre brand, hvis det er sikkert",
       "Sikkerhedsudstyr", true));
-
-  // SOP - beholdes
-  // reception.AddItem(new Item("2", "SOP",
-  //    "Indeholder sikkerhedsprocedurer",
-  //    "Dokument", true));
 
   // Førstehjælpskasse - erstatter øjenskyl
   foerstehjaelp.AddItem(new Item("3", "Førstehjælpskasse",
@@ -127,7 +122,6 @@ class World {
 
     //3. søjle midten af mappet
     laboratoriet.AddEdge("south", gangmodnord);
-    laboratoriet.IsLocked = true;
 
     gangmodnord.AddEdge("north", laboratoriet);
     gangmodnord.AddEdge("west", kontrolrum);
