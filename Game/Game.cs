@@ -9,7 +9,9 @@ class Game
   static Context context = new Context(world.GetEntry());
 
   public static Inventory inventory = new Inventory();
-  
+
+  static BrandSpredning brandSpredning = new BrandSpredning();
+
   static void Main(string[] args)
   {
     Console.OutputEncoding = System.Text.Encoding.UTF8;
@@ -38,11 +40,11 @@ class Game
     }
 
     Item brandSlukker = new Item("1", "Brandslukker", "Bruges til at slukke mindre brande", "Sikkerhedsudstyr", true);
-    
+
     Item førstehjælpskasse = new Item("3", "Førstehjælpskasse", "Bruges til at behandle skader og forbrændinger", "Førstehjælp", true);
-    
+
     Item evak = new Item("4", "Evakueringsplan", "Låser minimappet op, når du bruger den", "Dokument", true);
-    
+
     Item brandØkse = new Item("5", "Brandøkse", "Bruges til at åbne bestemte blokerede passager", "Værktøj", false);
     //Nye og ændrede items
 
@@ -58,6 +60,17 @@ class Game
     {
       Console.ForegroundColor = previousColor;
     }
+
+//Tilføjer en turn til brandspredning og tjekker hvad den er.
+    context.Timer.TurnChanged += (turn) =>
+    {
+      if (brandSpredning.CheckTurn(turn))
+      {
+        context.MakeDone();
+      }
+    };
+
+
 
     // Keeps asking for commands until the context marks the game as finished.
     while (context.IsDone() == false)
@@ -246,4 +259,3 @@ class Game
     return output;
   }
 }
-
