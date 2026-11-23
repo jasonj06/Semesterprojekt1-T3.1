@@ -8,7 +8,7 @@ class Game
   // Tracks the current room and whether the game has ended, starting in the entry room.
   static Context context = new Context(world.GetEntry());
 
-  static Inventory inventory = new Inventory();
+  public static Inventory inventory = new Inventory();
   
   static void Main(string[] args)
   {
@@ -195,6 +195,28 @@ class Game
         break;
       case "Dokument":
         Typewriter.WriteLine(item.Read());
+        break;
+        case "Sikkerhedsudstyr":
+        if(context.GetCurrent().GetName().ToLower() == "førstehjælpsrum")
+        {
+            context.IsCanteenFireOut = true;
+            Typewriter.WriteLine("Du slukkede branden i kantinen.");
+        }
+        else
+        {
+            Typewriter.WriteLine("Du kan ikke bruge " + item.GetName() + " her.");
+        }
+        break;
+        case "Værktøj":
+        if(context.GetCurrent().GetName().ToLower() == "kontor")
+        {
+            context.IsExitUnblocked = true;
+            Typewriter.WriteLine("Du swinger brandøksen og smadre blokeringen til udgangen");
+        }
+        else
+        {
+            Typewriter.WriteLine("Du kan ikke bruge " + item.GetName() + " her.");
+        }
         break;
       default:
         Typewriter.WriteLine("Du kan ikke bruge " + item.GetName() + " her.");
