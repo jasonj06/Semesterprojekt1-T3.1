@@ -30,9 +30,9 @@ static class Typewriter
     var originalColor = Console.ForegroundColor;
 
     // Try to parse the color string into a ConsoleColor enum value
-    if (Enum.TryParse<ConsoleColor>(color, ignoreCase: true, out ConsoleColor ParsedColor))
+    if (Enum.TryParse<ConsoleColor>(color, ignoreCase: true, out ConsoleColor parsedColor))
     {
-      Console.ForegroundColor = ParsedColor;
+      Console.ForegroundColor = parsedColor;
     }
 
     foreach (var letter in text.EnumerateRunes())
