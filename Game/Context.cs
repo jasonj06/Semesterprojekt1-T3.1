@@ -4,6 +4,8 @@
 class Context {
   Room current;
   bool done = false;
+  public bool IsExitUnblocked = false;
+  public bool IsCanteenFireOut = false;
   private readonly Minimap minimap = new Minimap();
   public TurnTimer Timer { get; } = new TurnTimer();
 
@@ -37,6 +39,19 @@ class Context {
       Typewriter.WriteLine("Døren er låst. Hvis du har et nøglekort, kan du skrive brug keycard.");
       return;
     }
+    
+    if(destination.ToLower() == "exit" && !IsExitUnblocked)
+    {
+        Typewriter.WriteLine("Døren er blokeret! Du skal bruge en brandøkse for komme igennem.");
+        return;
+    }
+
+    if(destination.ToLower() == "kantine" && !IsCanteenFireOut)
+    {
+        Typewriter.WriteLine("Der er brand i kantinen! Du skal bruge en brandslukker for komme igennem.");
+        return;
+    }
+    
     current.Goodbye();
     current = next;
     if (!Console.IsOutputRedirected) {

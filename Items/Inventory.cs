@@ -34,4 +34,16 @@ public class Inventory
     {
         return items;
     }
+
+    public bool HasItem (string id)
+    {
+        foreach(Item item in items)
+        {
+            if (item.GetId() == id)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }
