@@ -19,7 +19,7 @@ static class Typewriter
     Console.WriteLine();
   }
 
-  public static void WriteLineColor(ConsoleColor color, string text)
+  public static void WriteLineColor(string color, string text)
   {
     if (Console.IsOutputRedirected)
     {
@@ -28,7 +28,12 @@ static class Typewriter
     }
 
     var originalColor = Console.ForegroundColor;
-    Console.ForegroundColor = color;
+
+    // Try to parse the color string into a ConsoleColor enum value
+    if (Enum.TryParse<ConsoleColor>(color, ignoreCase: true, out ConsoleColor ParsedColor))
+    {
+      Console.ForegroundColor = ParsedColor;
+    }
 
     foreach (var letter in text.EnumerateRunes())
     {
