@@ -13,6 +13,7 @@ class Game
   static void Main(string[] args)
   {
     Console.OutputEncoding = System.Text.Encoding.UTF8;
+    Console.InputEncoding = System.Text.Encoding.UTF8;
     Typewriter.WriteLine("Velkommen til vores evakuerings spil omkring kemikalie sikkerhed, tryk enter for at forsætte");
     if (Console.ReadLine() == null)
     {
