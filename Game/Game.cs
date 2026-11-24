@@ -88,6 +88,15 @@ class Game
             break;
           }
           context.Transition(target);
+          if (context.HasWon() && !context.IsDone())
+          {
+            if (Console.ReadLine() == null)
+            {
+              context.MakeDone();
+              break;
+            }
+            context.Transition("Samlingspunkt");
+          }
           break;
         case "søg":
         case "sog":
@@ -118,8 +127,11 @@ class Game
           break;
       }
     }
-    // Displays the ending message once the game loop has stopped.
-    Typewriter.WriteLine("Game Over 😥");
+    if (context.HasWon()) {
+      Console.WriteLine("Tak fordi du spillede!");
+    } else {
+      Typewriter.WriteLine("Game Over 😥");
+    }
   }
 
   // Info and help share this command list.
