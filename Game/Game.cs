@@ -195,17 +195,12 @@ class Game
       Console.WriteLine("Du har nu adgang til bygningens minimap,");
       Console.WriteLine("som kan hjælpe dig med at navigere under evakueringen.");
       Console.WriteLine();
-      Console.WriteLine("----- KOMMANDOER -----");
-      Console.WriteLine("søg             - Undersøg rummet for genstande.");
-      Console.WriteLine("inv             - Se genstandene i din inventory.");
-      Console.WriteLine("brug [genstand] - Brug en genstand fra din inventory.");
+      Console.WriteLine("----- YDERLIGERE KOMMANDOER -----");
       Console.WriteLine("gå [rum]        - Bevæg dig til et tilstødende rum.");
       Console.WriteLine("help            - Se en liste over tilgængelige kommandoer.");
       Console.WriteLine();
       Console.WriteLine("Du er nu klar til at bevæge dig rundt i bygningen.");
       Console.WriteLine("Husk, at dine beslutninger kan have konsekvenser.");
-      Console.WriteLine();
-      Console.WriteLine("Minimap er nu låst op!");
       Console.WriteLine("===============================");
       Console.WriteLine();
       
