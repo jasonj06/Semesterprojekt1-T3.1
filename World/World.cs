@@ -38,8 +38,8 @@ class World {
           "På væggen hænger forskellige opslag om virksomhedens sikkerhedsprocedurer. ");
 
       Room gangmodnord = new Room("Gang mod Nord", "GN", 2, 1,
-          "Du træder ind i en lang gang mod nord. Nødlyset oplyser kun dele af området, " +
-          "og flere døre fører videre gennem bygningen. ");
+          "Du træder ind i en lang gang mod nord. Nødlyset oplyser kun dele af området, men du kan se en advarelseslampe ved labratoriet. " +
+          "Du tager en dyb indånding og lugter noget usædvanligt");
 
       Room laboratoriet = new Room("Laboratoriet", "LA", 2, 0,
           "Du træder forsigtigt ind i laboratoriet. Flere arbejdsstationer er forladte, " +
