@@ -8,12 +8,21 @@ class Room : Node
   // Each room remembers if the player has searched it.
   private bool searched = false;
 
- //bool to make a room lockable
-  public bool IsLocked { get; set; } = false;
+  public string MapLabel { get; }
+  public int MapColumn { get; }
+  public int MapRow { get; }
 
-  public Room(string name, string entryMessage) : base(name)
+  public Room(string name, string mapLabel, int mapColumn, int mapRow, string entryMessage) : base(name)
   {
+    MapLabel = mapLabel;
+    MapColumn = mapColumn;
+    MapRow = mapRow;
     this.entryMessage = entryMessage;
+  }
+
+  public bool HasExitTo(Room room)
+  {
+    return edges.ContainsValue(room);
   }
 
   public void AddItem(Item item)
@@ -27,11 +36,11 @@ class Room : Node
     List<Item> items = roomItems.GetItems();
     if (items.Count == 0)
     {
-      Console.WriteLine("Du finder ingen genstande i rummet.");
+      Typewriter.WriteLine("Du finder ingen genstande i rummet.");
       return;
     }
 
-    Console.WriteLine("Du fandt følgende genstande:");
+    Typewriter.WriteLine("Du fandt følgende genstande:");
     foreach (Item item in items)
     {
       Console.WriteLine(" - " + item.GetName() + " (tag " + item.GetName() + ")");
@@ -42,52 +51,68 @@ class Room : Node
   {
     if (!searched)
     {
-      Console.WriteLine("Skriv søg for at lede efter genstande i rummet først.");
+      Typewriter.WriteLine("Skriv søg for at lede efter genstande i rummet først.");
       return;
     }
 
     Item? item = roomItems.FindItem(itemName);
     if (item == null)
     {
-      Console.WriteLine("Der er ingen genstand med navnet " + itemName + " i rummet.");
+      Typewriter.WriteLine("Der er ingen genstand med navnet " + itemName + " i rummet.");
       return;
     }
 
     // Move the item from the room to the player's inventory.
     inventory.AddItem(item);
     roomItems.RemoveItem(item);
-    Console.WriteLine("Du tog " + item.GetName() + ".");
-  }
-
-  public void UseKeycard()
-  {
-    // Look for a locked room the player can reach from here.
-    foreach (Room destination in edges.Values)
+    Typewriter.WriteLine("Du tog " + item.GetName() + ".");
+    if (item.GetId() == "4")
     {
-      if (destination.IsLocked)
-      {
-        destination.IsLocked = false;
-        Console.WriteLine("Du låste døren til " + destination.GetName() + " op med dit nøglekort.");
-        return;
-      }
+      Typewriter.WriteLine("Skriv inv for at se evakueringsplanen i din inventory.");
     }
-
-    Console.WriteLine("Der er ingen låste døre, hvor du kan bruge nøglekortet her.");
   }
 
-  public void Welcome()
+  public void Welcome(int textWidth)
   {
-    Console.WriteLine("Du er nu i " + name);
-    Console.WriteLine(entryMessage);
+    WriteEntryMessage(textWidth);
     Console.WriteLine("Du kan gå til:");
-    foreach (Node destination in edges.Values)
+    foreach (KeyValuePair<string, Node> exit in edges)
     {
-      Console.WriteLine(" - " + destination.GetName());
+      string direction = exit.Key switch
+      {
+        "north" => "nord",
+        "south" => "syd",
+        "west" => "vest",
+        "east" => "øst",
+        _ => exit.Key
+      };
+      Console.WriteLine(" - " + exit.Value.GetName() + " (" + direction + ")");
     }
   }
 
-  public void Goodbye()
+  private void WriteEntryMessage(int width)
   {
+    if (width == 0)
+    {
+      Typewriter.WriteLine(entryMessage);
+      return;
+    }
+
+    foreach (string paragraph in entryMessage.ReplaceLineEndings("\n").Split('\n'))
+    {
+      string line = paragraph;
+      while (line.Length > width)
+      {
+        int end = line.LastIndexOf(' ', width);
+        if (end <= 0)
+        {
+          end = width;
+        }
+        Typewriter.WriteLine(line[..end]);
+        line = line[end..].TrimStart();
+      }
+      Typewriter.WriteLine(line);
+    }
   }
 
   public override Room? FollowEdge(string destination)
