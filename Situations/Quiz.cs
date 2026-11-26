@@ -1,54 +1,77 @@
 class Quiz {
-    private string question;
-    private string[] options;
-    private int correctOptionIndex;
-    private string explainer;
-    private Quiz(string question, string[] options, int correctOptionIndex, string explainer) {
-        this.question = question;
-        this.options = options;
-        this.correctOptionIndex = correctOptionIndex;
-        this.explainer = explainer;
+    private class Question
+    {
+        public readonly string question;
+        public readonly string[] options;
+        public readonly int correctOptionIndex;
+        public readonly string explainer;
+
+        public Question(string question, string[] options, int correctOptionIndex, string explainer)
+        {
+            this.question = question;
+            this.options = options;
+            this.correctOptionIndex = correctOptionIndex;
+            this.explainer = explainer;
+        }
     }
 
-    private static Quiz[] questions = new Quiz[] {
-        new Quiz("Du opdager en brand under evakueringen. Hvad bør du gøre?", 
-            new string[]{
+    private static readonly Question[] questions = new Question[]
+    {
+        new Question(
+            "Du opdager en brand under evakueringen. Hvad bør du gøre?",
+            new string[]
+            {
                 "Forsøge at slukke branden uanset størrelsen",
-                "Prioritere sikker evakuering og kun forsøge slukning, hvis det er sikkert og du er instrueret i det", 
-                "Åbne vinduerne for at fjerne røgen"}, 1,
-                "Under en brand bør du altid prioritere sikker evakuering. Er du instrueret kan du forsøge at slukke branden hvis du vurdere det til at være sikkert."),
-
-        new Quiz("Du opdager et kemikalieudslip i laboratoriet. Hvad gør du?",
-            new string[]{
+                "Prioritere sikker evakuering og kun forsøge slukning, hvis det er sikkert og du er instrueret i det",
+                "Åbne vinduerne for at fjerne røgen"
+            },
+            1,
+            "Under en brand bør du altid prioritere sikker evakuering. Er du instrueret kan du forsøge at slukke branden hvis du vurderer det til at være sikkert."
+        ),
+        new Question(
+            "Du opdager et kemikalieudslip i laboratoriet. Hvad gør du?",
+            new string[]
+            {
                 "Forsøger at tørre kemikaliet op",
                 "Undersøger kemikaliet ved at lugte til det",
                 "Holder afstand, advarer andre og følger evakueringsproceduren"
-                }, 2,
-                "Du bør holde afstand, advare andre og følge evakeringsproceduren."),
-
-        new Quiz("Du kommer til skade og begynder at bløde kraftigt. Hvad bør du gøre?",
-            new string[]{
+            },
+            2,
+            "Du bør holde afstand, advare andre og følge evakueringsproceduren."
+        ),
+        new Question(
+            "Du kommer til skade og begynder at bløde kraftigt. Hvad bør du gøre?",
+            new string[]
+            {
                 "Lægge direkte tryk på såret og tilkalde hjælp",
                 "Vente på, at blødningen stopper af sig selv",
                 "Skylle såret og fortsætte arbejdet"
-                }, 0,
-                "Du bør lægge tryk på såret for at formindske blødningen så vidt som muligt og tilkalde hjælp."),
-
-        new Quiz("En gang er blokeret efter en eksplosion. Hvad er den sikreste handling?", 
-            new string[]{
+            },
+            0,
+            "Du bør lægge tryk på såret for at formindske blødningen så vidt som muligt og tilkalde hjælp."
+        ),
+        new Question(
+            "En gang er blokeret efter en eksplosion. Hvad er den sikreste handling?",
+            new string[]
+            {
                 "Forsøge at flytte tunge genstande med magt",
                 "Finde en anden sikker flugtvej",
                 "Kravle gennem det beskadigede område"
-                }, 1,
-                "Den sikreste handling er at finde en anden, sikker flugtvej."),
-
-        new Quiz("Du er nået ud af bygningen. Hvad skal du gøre nu?",
-            new string[]{
+            },
+            1,
+            "Den sikreste handling er at finde en anden, sikker flugtvej."
+        ),
+        new Question(
+            "Du er nået ud af bygningen. Hvad skal du gøre nu?",
+            new string[]
+            {
                 "Gå hjem uden at fortælle nogen det",
                 "Gå tilbage for at hente personlige ejendele",
                 "Gå til samlingspunktet og melde dig til den ansvarlige"
-                }, 2,
-                "Er du noget ud af bygningen skal du gå til samlingspunktet og melde dig til den ansvarlige.")
+            },
+            2,
+            "Er du nået ud af bygningen skal du gå til samlingspunktet og melde dig til den ansvarlige."
+        )
     };
 
     public static void StartQuiz() {
