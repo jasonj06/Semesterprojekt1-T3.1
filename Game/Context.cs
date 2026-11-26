@@ -4,6 +4,7 @@
 class Context {
   Room current;
   bool done = false;
+  bool won = false;
   public bool IsExitUnblocked = false;
   public bool IsCanteenFireOut = false;
   private readonly Minimap minimap = new Minimap();
@@ -39,13 +40,13 @@ class Context {
       return;
     }
     
-    if(destination.ToLower() == "exit" && !IsExitUnblocked)
+    if(next.GetName() == "Exit" && !IsExitUnblocked)
     {
         Typewriter.WriteLine("Døren er blokeret! Du skal bruge en brandøkse for komme igennem.");
         return;
     }
 
-    if(destination.ToLower() == "kantine" && !IsCanteenFireOut)
+    if(next.GetName() == "Kantine" && !IsCanteenFireOut)
     {
         Typewriter.WriteLine("Der er brand i kantinen! Du skal bruge en brandslukker for komme igennem.");
         return;
@@ -62,13 +63,39 @@ class Context {
       return;
     }
 
+    if (current.GetName() == "Exit") {
+      won = true;
+      ShowWinScreen();
+      return;
+    }
+
     ShowCurrentRoom();
     if (current.GetName() == "Samlingspunkt") {
       Quiz.StartQuiz();
+      MakeDone();
     }
   }
 
+  private void ShowWinScreen() {
+    if (!Console.IsOutputRedirected) {
+      Console.Clear();
+    }
 
+    Console.WriteLine();
+    Console.WriteLine("██  █ █     ███ █ █  █  █ █ █ █ ███ ██  ███ ██  ███  █ ");
+    Console.WriteLine("█ █ █ █     █   █ █ █ █ ██  █ █ █   █ █ █   █ █ █    █ ");
+    Console.WriteLine("█ █ █ █     ██  █ █ ███ █   █ █ ██  ██  ██  █ █ ██   █ ");
+    Console.WriteLine("█ █ █ █     █   █ █ █ █ ██  █ █ █   █ █ █   █ █ █      ");
+    Console.WriteLine("██  ███     ███  █  █ █ █ █ ███ ███ █ █ ███ ██  ███  █ ");
+    Console.WriteLine();
+    Console.WriteLine("Du evakuerede!");
+    Console.WriteLine();
+    Console.WriteLine("Tryk Enter for at gå til Samlingspunkt.");
+  }
+
+  public bool HasWon() {
+    return won;
+  }
   
   public void MakeDone () {
     done = true;

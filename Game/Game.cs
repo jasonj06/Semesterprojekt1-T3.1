@@ -105,6 +105,15 @@ class Game
             break;
           }
           context.Transition(target);
+          if (context.HasWon() && !context.IsDone())
+          {
+            if (Console.ReadLine() == null)
+            {
+              context.MakeDone();
+              break;
+            }
+            context.Transition("Samlingspunkt");
+          }
           break;
         case "søg":
         case "sog":
@@ -135,8 +144,11 @@ class Game
           break;
       }
     }
-    // Displays the ending message once the game loop has stopped.
-    Typewriter.WriteLine("Game Over 😥");
+    if (context.HasWon()) {
+      Console.WriteLine("Tak fordi du spillede!");
+    } else {
+      Typewriter.WriteLine("Game Over 😥");
+    }
   }
 
   // Info and help share this command list.
@@ -178,7 +190,23 @@ class Game
       }
 
       //Melanie tutorial message
-      Console.WriteLine("placeholder message");
+      Console.WriteLine("===== TUTORIAL GENNEMFØRT =====");
+      Console.WriteLine();
+      Console.WriteLine("Du har nu gennemgået virksomhedens sikkerhedsprocedurer.");
+      Console.WriteLine("Du har lært at søge efter, finde og bruge genstande.");
+      Console.WriteLine();
+      Console.WriteLine("Du har nu adgang til bygningens minimap,");
+      Console.WriteLine("som kan hjælpe dig med at navigere under evakueringen.");
+      Console.WriteLine();
+      Console.WriteLine("----- YDERLIGERE KOMMANDOER -----");
+      Console.WriteLine("gå [rum]        - Bevæg dig til et tilstødende rum.");
+      Console.WriteLine("help            - Se en liste over tilgængelige kommandoer.");
+      Console.WriteLine();
+      Console.WriteLine("Du er nu klar til at bevæge dig rundt i bygningen.");
+      Console.WriteLine("Husk, at dine beslutninger kan have konsekvenser.");
+      Console.WriteLine("===============================");
+      Console.WriteLine();
+      
       Console.WriteLine("Tryk Enter for at vende tilbage til rummet.");
       if (Console.ReadLine() == null)
       {
